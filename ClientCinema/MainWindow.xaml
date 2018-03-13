@@ -1,0 +1,22 @@
+﻿<Window x:Class="ClientCinema.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientCinema"
+        mc:Ignorable="d"
+        Title="Список сеансов" Height="350" Width="525">
+    <Grid>
+        <DataGrid x:Name="shows"  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фильм" IsReadOnly="True" Binding="{Binding name}" Width="5*"/>
+                <DataGridTextColumn Header="Время" IsReadOnly="True" Binding="{Binding timeH}" Width="5*"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Купить билеты" Click="MenuItem_Click" x:Name="show_buy"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="lul_CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Show">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ShowTickets" Relationship="Self.FK_ShowTickets_Shows" FromRole="Shows" ToRole="ShowTickets" />
+  </EntityType>
+  <EntityType Name="ShowTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="show" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int16" Nullable="false" />
+    <Property Name="at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Show1" Relationship="Self.FK_ShowTickets_Shows" FromRole="ShowTickets" ToRole="Shows" />
+  </EntityType>
+  <Association Name="FK_ShowTickets_Shows">
+    <End Role="Shows" Type="Self.Show" Multiplicity="1" />
+    <End Role="ShowTickets" Type="Self.ShowTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shows">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShowTickets">
+        <PropertyRef Name="show" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="lulCinemaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Shows" EntityType="Self.Show" />
+    <EntitySet Name="ShowTickets" EntityType="Self.ShowTicket" />
+    <AssociationSet Name="FK_ShowTickets_Shows" Association="Self.FK_ShowTickets_Shows">
+      <End Role="Shows" EntitySet="Shows" />
+      <End Role="ShowTickets" EntitySet="ShowTickets" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

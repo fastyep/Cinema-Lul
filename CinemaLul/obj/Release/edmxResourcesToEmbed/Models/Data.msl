@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище lul_CinemaModelContainer" CdmEntityContainer="lul_CinemaEntities">
+    <EntitySetMapping Name="Shows">
+      <EntityTypeMapping TypeName="lul_CinemaModel.Show">
+        <MappingFragment StoreEntitySet="Shows">
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShowTickets">
+      <EntityTypeMapping TypeName="lul_CinemaModel.ShowTicket">
+        <MappingFragment StoreEntitySet="ShowTickets">
+          <ScalarProperty Name="at" ColumnName="at" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="show" ColumnName="show" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

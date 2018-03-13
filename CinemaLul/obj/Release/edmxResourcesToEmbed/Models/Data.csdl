@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="lul_CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="lul_CinemaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Shows" EntityType="lul_CinemaModel.Show" />
+    <EntitySet Name="ShowTickets" EntityType="lul_CinemaModel.ShowTicket" />
+    <AssociationSet Name="FK_ShowTickets_Shows" Association="lul_CinemaModel.FK_ShowTickets_Shows">
+      <End Role="Show" EntitySet="Shows" />
+      <End Role="ShowTicket" EntitySet="ShowTickets" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Show">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ShowTickets" Relationship="lul_CinemaModel.FK_ShowTickets_Shows" FromRole="Show" ToRole="ShowTicket" />
+  </EntityType>
+  <EntityType Name="ShowTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="show" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int16" Nullable="false" />
+    <Property Name="at" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Show1" Relationship="lul_CinemaModel.FK_ShowTickets_Shows" FromRole="ShowTicket" ToRole="Show" />
+  </EntityType>
+  <Association Name="FK_ShowTickets_Shows">
+    <End Type="lul_CinemaModel.Show" Role="Show" Multiplicity="1" />
+    <End Type="lul_CinemaModel.ShowTicket" Role="ShowTicket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Show">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShowTicket">
+        <PropertyRef Name="show" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
